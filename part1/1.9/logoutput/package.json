@@ -1,0 +1,16 @@
+{
+  "name": "log_output",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "zzh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "log_output": "file:",
+    "project-v0.1": "file:"
+  }
+}

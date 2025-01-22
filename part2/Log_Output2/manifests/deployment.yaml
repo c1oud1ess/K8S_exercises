@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logoutput2-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logoutput2
+  template:
+    metadata:
+      labels:
+        app: logoutput2
+    spec:
+      volumes:
+        - name: shared-file
+      containers:
+        - name: reader
+          image: mobporo/reader:new2
+          volumeMounts:
+          - name: shared-file
+            mountPath: /usr/src/app/files
+        - name: writer
+          image: mobporo/writer:new2
+          volumeMounts:
+          - name: shared-file
+            mountPath: /usr/src/app/files
