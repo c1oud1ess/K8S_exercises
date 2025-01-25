@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: project
+  name: project-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project
+  template:
+    metadata:
+      labels:
+        app: project
+    spec:
+      volumes:
+        - name: shared-file
+          persistentVolumeClaim:
+            claimName: project-claim
+      containers:
+        - name: project
+          image: mobporo/project:2083
+          volumeMounts:
+          - name: shared-file
+            mountPath: /usr/src/app/files
+        - name: backend
+          image: mobporo/backend:2083
+          envFrom:
+            - secretRef:
+                name: db-password
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-password
+                  key: POSTGRES_PASSWORD
+          # volumeMounts:
+          # - name: shared-file
+          #   mountPath: /usr/src/app/files
+        

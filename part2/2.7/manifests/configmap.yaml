@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: pingpong
+  name: pingpong-conf
+data:
+  information.txt: |
+    this text is from file
+  MESSAGE: "hello world"

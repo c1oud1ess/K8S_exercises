@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: daily
+  namespace: project
+spec:
+  schedule: "02 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: daily
+            image: mobporo/daily:3
+          restartPolicy: Never
